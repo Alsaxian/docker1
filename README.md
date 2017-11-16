@@ -45,7 +45,7 @@ la ligne 31 du fichier ```Dockerfile``` de cette dernière, où il ajoute le mod
 Du coup sans exigences particulières on télécharge tranquillement 
 la dernière version de ```nginx``` en saisissant la commande
 ```bash
-$ docker pull latest
+$ docker pull nginx
 ```
 Pour vérifier que le téléchargement de l’image était bonne, on peut taper
 ```bash
