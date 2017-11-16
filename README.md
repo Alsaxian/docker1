@@ -1,4 +1,3 @@
-
 # Rapport du TP Utilisation de Docker
 
 Binôme : Swarth-Elia ___ et Xian YANG   
@@ -36,7 +35,7 @@ portant le nom ```nginx```, ayant au moins 3 étoiles accompagnées d’une desc
 On voit bien en tête de cette liste l’image officielle avec 7219 étoiles au moment de la rédaction de ce rapport.  
   
 Pour trouver des informations sur ses différentes versions, 
-on peut aller sur [dockerhub](dockerhub.com) et lire la documentation docker de ```nginx```, 
+on peut aller sur [dockerhub](http://dockerhub.com) et lire la documentation docker de ```nginx```, 
 où on peut reconnaître sa dernière version ```1.13.6``` par l'étiquette ```latest```. 
 D’ailleurs la différence entre la version principale et celle de Perl consiste en 
 la ligne 31 du fichier ```Dockerfile``` de cette dernière, où il ajoute le module Perl avec
