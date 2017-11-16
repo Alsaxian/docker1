@@ -1,18 +1,39 @@
 -------------------
-Title:	A New MultiMarkdown Document  
-Author: Fletcher T. Penney	
-		John Doe  
-Date:	July 25, 2005  
+# Rapport du TP Utilisation de Docker
+
+Binôme : Swarth-Elia ___ et Xian YANG
+Promotion : Data Science Math
+L'adresse IP de la machine virtuelle : [http://192.168.76.13/](http://192.168.76.13/)
+Date : 16 nov. 2017
 
 [TOC]
 
-### 1. 制作一份待办事宜 [Todo 列表](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#13-待办事宜-todo-列表)
+## Préparation d'une machine virtuelle avec Docker
+En premier temps, on monte une VM avec docker pré-installé sur Openstack. 
+Après passer en root afin de faciliter la saisie de commandes, 
+on vérifie l’installation de docker sur la VM avec
+```sh
+$ docker version
+```
+ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.
+  
+  
+## I. Installation d'un docker nginx
 
 - [ ] 支持以 PDF 格式导出文稿
 - [x] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率
 - [x] 新增 Todo 列表功能
 - [x] 修复 LaTex 公式渲染问题
 - [x] 新增 LaTex 公式编号功能
+
+On va d’abord trouver la bonne version de docker nginx qu’on va utiliser par la suite. 
+Pour le faire, on peut taper
+```sh
+$ docker search --stars=3 --no-trunc nginx
+```
+qui va chercher par défaut sur dockerhub et puis afficher toutes les docker images disponibles 
+portant le nom ```nginx```, ayant au moins 3 étoiles accompagnées d’une description non-tronquée. 
+On voit bien en tête de cette liste l’image officielle avec 7219 étoiles au moment de la rédaction de ce rapport.
 
 ### 2. 书写一个质能守恒公式[^LaTeX]
 ![](http://latex.codecogs.com/gif.latex?\\frac{1}{1+sin(x)})
