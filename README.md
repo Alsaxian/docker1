@@ -26,14 +26,32 @@ ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.
 - [x] 修复 LaTex 公式渲染问题
 - [x] 新增 LaTex 公式编号功能
 
-On va d’abord trouver la bonne version de docker nginx qu’on va utiliser par la suite. 
+On va d’abord trouver la bonne version de docker ```nginx``` qu’on va utiliser par la suite. 
 Pour le faire, on peut taper
 ```sh
 $ docker search --stars=3 --no-trunc nginx
 ```
 qui va chercher par défaut sur dockerhub et puis afficher toutes les docker images disponibles 
 portant le nom ```nginx```, ayant au moins 3 étoiles accompagnées d’une description non-tronquée. 
-On voit bien en tête de cette liste l’image officielle avec 7219 étoiles au moment de la rédaction de ce rapport.
+On voit bien en tête de cette liste l’image officielle avec 7219 étoiles au moment de la rédaction de ce rapport.  
+  
+Pour trouver des informations sur ses différentes versions, 
+on peut aller sur [dockerhub](dockerhub.com) et lire la documentation docker de ```nginx```, 
+où on peut reconnaître sa dernière version ```1.13.6``` par l'étiquette ```latest```. 
+D’ailleurs la différence entre la version principale et celle de Perl consiste en 
+la ligne 31 du fichier ```Dockerfile``` de cette dernière, où il ajoute le module Perl avec
+> nginx-module-perl=${NGINX_VERSION} 
+Du coup sans exigences particulières on télécharge tranquillement 
+la dernière version de ```nginx``` en saisissant la commande
+```bash
+$ docker pull latest
+```
+Pour vérifier que le téléchargement de l’image était bonne, on peut taper
+```bash
+$ docker images nginx
+```
+ce qui nous donne entre autres son nom (```nginx```) et son libellé (```latest```).
+
 
 ### 2. 书写一个质能守恒公式[^LaTeX]
 ![](http://latex.codecogs.com/gif.latex?\\frac{1}{1+sin(x)})
