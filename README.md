@@ -1,14 +1,14 @@
 -------------------
 # Rapport du TP Utilisation de Docker
 
-Binôme : Swarth-Elia ___ et Xian YANG
-Promotion : Data Science Math
-L'adresse IP de la machine virtuelle : [http://192.168.76.13/](http://192.168.76.13/)
-Date : 16 nov. 2017
+Binôme : Swarth-Elia ___ et Xian YANG   
+Promotion : Data Science Math   
+L'adresse IP de la machine virtuelle : [http://192.168.76.13/](http://192.168.76.13/)   
+Date : 16 nov. 2017   
 
 [TOC]
 
-## Préparation d'une machine virtuelle avec Docker
+## 0. Préparation d'une machine virtuelle avec Docker
 En premier temps, on monte une VM avec docker pré-installé sur Openstack. 
 Après passer en root afin de faciliter la saisie de commandes, 
 on vérifie l’installation de docker sur la VM avec
