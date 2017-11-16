@@ -13,7 +13,7 @@ En premier temps, on monte une VM avec docker pré-installé sur Openstack.
 Après passer en root afin de faciliter la saisie de commandes, 
 on vérifie l’installation de docker sur la VM avec
 ```sh
-# docker version
+$ docker version
 ```
 ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.
   
@@ -29,7 +29,7 @@ ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.
 On va d’abord trouver la bonne version de docker nginx qu’on va utiliser par la suite. 
 Pour le faire, on peut taper
 ```sh
-# docker search --stars=3 --no-trunc nginx
+$ docker search --stars=3 --no-trunc nginx
 ```
 qui va chercher par défaut sur dockerhub et puis afficher toutes les docker images disponibles 
 portant le nom ```nginx```, ayant au moins 3 étoiles accompagnées d’une description non-tronquée. 
