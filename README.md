@@ -41,6 +41,7 @@ où on peut reconnaître sa dernière version ```1.13.6``` par l'étiquette ```l
 D’ailleurs la différence entre la version principale et celle de Perl consiste en 
 la ligne 31 du fichier ```Dockerfile``` de cette dernière, où il ajoute le module Perl avec
 > nginx-module-perl=${NGINX_VERSION} 
+
 Du coup sans exigences particulières on télécharge tranquillement 
 la dernière version de ```nginx``` en saisissant la commande
 ```bash
