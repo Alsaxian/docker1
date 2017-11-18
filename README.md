@@ -241,14 +241,14 @@ on ajoute au fichier `/docker/nginx/config/nginx/conf.d/default.conf`, dans "loc
 
 et au fichier `/docker/nginx/config/nginx/nginx.conf`
 > upstream project {
-    &ensp; &ensp;	server 172.18.100.10;
-    &ensp; &ensp;	server 172.18.100.11;
-}
+>    &ensp; &ensp;	server 172.18.100.10;
+>    &ensp; &ensp;	server 172.18.100.11;
+> }
 
 Ensuite pour différencier bien les deux sites on crée sous `/docker/apache/html` un site web `test.php` qui contient
 > <?php
-    &ensp; &ensp;	echo "<pre>".print_r($_SERVER, true)."</pre>";
-?>
+>    &ensp; &ensp;	echo "\<pre\>".print_r($_SERVER, true)."\</pre\>";
+> ?>
 
 En appelant l’adresse [http://192.168.76.13/test.php](http://192.168.76.13/test.php) plusieurs fois, 
 on peut constater que les requêtes sont bien prises en charges par les deux serveurs apache de façon alternées. 
