@@ -245,20 +245,26 @@ En ajoutant cette partie
 
 au fichier `/docker/nginx/config/nginx/conf.d/default.conf` et après avoir relancé `nginx`, 
 on peut visiter les deux serveurs dans le navigateur resp. à 
-[http://192.168.76.13/site1](http://192.168.76.13/site1) et [http://192.168.76.13/site2](http://192.168.76.13/site2].
+[http://192.168.76.13/site1](http://192.168.76.13/site1) et [http://192.168.76.13/site2](http://192.168.76.13/site2).
 
 
 
-
-
+ &ensp; &ensp;  
+ &ensp; &ensp;  
+   
 ### IV. Equilibrage de charge
   
-  
-  
+ &ensp; &ensp;    
+ &ensp; &ensp;  
+   
 - [x] Partage de charge de façon alternée par les deux serveurs apache indépendemment des requêtes
    
+ 
+
+&ensp; &ensp;    
+&ensp; &ensp;   
    
-    
+ 
    
 
 
