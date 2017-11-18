@@ -50,7 +50,74 @@ Pour vérifier que le téléchargement de l’image était bonne, on peut taper
 ```bash
 $ docker images nginx
 ```
-ce qui nous donne entre autres son nom (```nginx```) et son libellé (```latest```).
+ce qui nous donne entre autres son nom (```nginx```) et son libellé (```latest```).  
+  
+A partir de cette image on peut créer et lancer notre premier container nommé test avec
+
+```bash
+$ run -d --name test --hostname test -p 80:80 -p 443:443 nginx
+```
+qui lie les ports 80 et 443 du container avec resp. 
+ceux de la VM. On peut vérifier ceci en entrant dans le navigateur l’adresse IP 
+de notre machine virtuelle [http://192.168.76.13/](http://192.168.76.13/) 
+(où le navigateur va chercher par défaut le port 80 de la VM) et on voit 
+la page d’accueil de nginx 
+> Welcome to nginx!
+
+Ensuite on va aller dans le container et y créer un fichier `toto` sous la racine contenant "coucou".
+```bash
+$ docker exec -it test bash
+$ echo coucou > /toto
+```
+Pour vérifier, on peut faire
+```bash
+$ cat /toto
+```
+ce qui nous affichera "coucou".  
+  
+Après sortir du container, on essaie maintenant de retrouver ce message dans notre VM. 
+On peut saisir la commande suivante dans le terminal pour extraire le chemin vers 
+le driver overlay2 du container dans la VM.
+```bash
+$ docker container inspect test | grep Dir
+```
+ou encore mieux
+```bash
+$ docker container inspect -f "{{ json .GraphDriver }}" test | python3 -m json.tool
+```
+On y reconnaît entre autres un "LowerDir" représentant les répertoires de l’image ngninx 
+utilisé par ce container qui sont constitués de plusieurs couches, 
+un `UpperDir` représentant la couche ajoutée par le container et un `MergedDir` 
+le point de montage de ces deux premiers.  
+  
+Une fois qu’on a trouvé le répertoire `UpperDir`, on peut retrouver le fichier 
+qu’on vient de créer en dehors du container.
+```bash
+$ ls /var/lib/docker/overlay2/ac5ade1ec1b1fb3a1cfb871b77192fe61ce8cedbe1f1f2b61a86b13614945c6e/diff
+```
+ce qui nous affiche bien le fichier `toto`.  
+  
+Maintenant on veut monter un docker container en répertoire partagé afin de 
+faciliter sa configuration en dehors du container. Pour le faire, 
+on garde d’abord une copie du répertoire de configuration du présent container dans la VM
+```bash
+$ mkdir -p /docker/nginx/config
+$ docker cp test:/etc/nginx /docker/nginx/config
+```
+Ensuite on supprime le container test et en créer un nouveau avec un répertoire partagé
+```bash
+$ docker rm -f test
+$ docker run -d --name nginx --hostname nginx -p 80:80 -p 443:443 -v /docker/nginx/config/nginx:/etc/nginx nginx
+```
+Puis, on peut modifier le fichier de configuration dans le répertoire partagé 
+de la VM en y ajoutant p. ex. une phrase personnalisée dans le message d’erreurs à afficher. 
+On redémarre le container. Après, quand on demande un site inexistant sous l’adresse IP 
+de cette VM dans le navigateur, on peut voir, avec le journal dynamique ou non 
+```bash
+$ docker logs -f nginx
+```
+que le message d’erreurs est maintenant personnalisé, ce qui montre le bon fonctionnement 
+du répertoire partagé entre le container et la VM.
 
 
 ### 2. 书写一个质能守恒公式[^LaTeX]
