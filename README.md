@@ -218,11 +218,11 @@ Par contre une autre VM ne peut pas y avoir accès sauf faire des ssh enchaîné
 d’abord à la VM actuelle, puisque ces réseaux-là sont internes à la VM.  
   
 En ajoutant cette partie 
-> location /site1 {
-    &ensp; &ensp;	proxy_pass http://172.18.100.10/;
-> }
-> location /site2 {
-    &ensp; &ensp;	proxy_pass http://172.18.100.11/;
+> location /site1 {   
+    &ensp; &ensp;	proxy_pass http://172.18.100.10/;  
+> }  
+> location /site2 {  
+    &ensp; &ensp;	proxy_pass http://172.18.100.11/;  
 > }
 
 au fichier `/docker/nginx/config/nginx/conf.d/default.conf` et après avoir relancé `nginx`, 
@@ -240,14 +240,14 @@ on ajoute au fichier `/docker/nginx/config/nginx/conf.d/default.conf`, dans "loc
 > proxy_pass http://project;
 
 et au fichier `/docker/nginx/config/nginx/nginx.conf`
-> upstream project {
->    &ensp; &ensp;	server 172.18.100.10;
->    &ensp; &ensp;	server 172.18.100.11;
+> upstream project {  
+>    &ensp; &ensp;	server 172.18.100.10;  
+>    &ensp; &ensp;	server 172.18.100.11;  
 > }
 
 Ensuite pour différencier bien les deux sites on crée sous `/docker/apache/html` un site web `test.php` qui contient
-> <?php
->    &ensp; &ensp;	echo "\<pre\>".print_r($_SERVER, true)."\</pre\>";
+> <?php  
+>    &ensp; &ensp;	echo "\<pre\>".print_r($_SERVER, true)."\</pre\>";  
 > ?>
 
 En appelant l’adresse [http://192.168.76.13/test.php](http://192.168.76.13/test.php) plusieurs fois, 
