@@ -125,10 +125,10 @@ du répertoire partagé entre le container et la VM.
 ## II. Installation d'un docker apache
   
   
-- [x] Construction d'un docker image partir d'un Dockerfile 
+- [x] Construction d'un docker image à partir d'un Dockerfile 
 - [x] Personnalisation du Dockerfile 
-- [x] Création d'un containers apache et attachement de celui-ci au serveur nginx
-- [x] Test de son fonctionnement avec la visite de la page web dont s'occupe le serveur apache à travers le serveur nginx
+- [x] Création d'un container apache et attachement de celui-ci au serveur nginx
+- [x] Transfert de requêtes des certains sites web du serveur nginx au serveur apache
  
 
   
@@ -200,10 +200,10 @@ Quand on renouvelle le site web, on peut y constater
   
   
 - [x] Création d'un réseau utilisateur
-- [x] Lancement d'un premier docker container d'essai avec l'attachement des ports 
-- [x] Recherche de sa position et sa structure dans le system de fichiers de l'hôte
-- [x] Création d'un nouveau container avec un volume partagé
-- [x] Test du fonctionnement du volume partagé  
+- [x] Création de deux docker containers apache dans ce réseau avec affectation d'adresses IP personnalisées  
+- [x] Connecton du docker container nginx du réseau par défaut dans ce réseau
+- [x] Transfert des requêtes de certaines pages web respectivement aux deux serveurs apache
+
 
   
 Afin de rendre possible l’affectation d’une adresse IP de notre choix au container, 
@@ -252,6 +252,16 @@ on peut visiter les deux serveurs dans le navigateur resp. à
 
 
 ### IV. Equilibrage de charge
+  
+  
+  
+- [x] Partage de charge de façon alternée par les deux serveurs apache indépendemment des requêtes
+   
+   
+    
+   
+
+
 
 Afin que le charge de requêtes de nginx soit réparti de façon alternée sur les deux serveurs apache, 
 on ajoute au fichier `/docker/nginx/config/nginx/conf.d/default.conf`, dans "location / {...}"
@@ -292,50 +302,3 @@ La variable permettant de détecter le container visité c’est `[SERVER_ADDR]`
 
 
   
-
-  
-
-```flow
-st=>start: Start
-op=>operation: Your Operation
-cond=>condition: Yes or No?
-e=>end
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-
-### 5. 高效绘制 [序列图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图)
-
-```seq
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
-```
-
-### 6. 高效绘制 [甘特图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-甘特图)
-
-```gantt
-    title 项目开发流程
-    section 项目确定
-        需求分析       :a1, 2016-06-22, 3d
-        可行性报告     :after a1, 5d
-        概念验证       : 5d
-    section 项目实施
-        概要设计      :2016-07-05  , 5d
-        详细设计      :2016-07-08, 10d
-        编码          :2016-07-15, 10d
-        测试          :2016-07-22, 5d
-    section 发布验收
-        发布: 2d
-        验收: 3d
-```
-
-### 7. 绘制表格
-
-| 项目        | 价格   |  数量  |
-| --------   | -----:  | :----:  |
-| 计算机     | \$1600 |   5     |
-| 手机        |   \$12   |   12   |
-| 管线        |    \$1    |  234  |
