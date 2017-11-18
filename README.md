@@ -17,7 +17,7 @@ on vérifie l’installation de docker sur la VM avec
 ```sh
 $ docker version
 ```
-ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.  
+ce qui nous renvoie le numéro de sa version et assure son bon fonctionnement.  
 
    &ensp; &ensp;    
  &ensp; &ensp;  
