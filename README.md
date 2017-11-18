@@ -136,8 +136,8 @@ Après, on va modifier le Dockerfile de façon
    
 1. qu’il installera les modules nécessaire, en changeant la ligne d’installation à
     > RUN  apt-get update && apt-get -y install apache2 \  
-       &ensp; php-pear php5-ldap php-auth php5-mysql php5-common \   
-       &ensp; libapache2-mod-php5 && apt-get clean  
+       &ensp; &ensp; php-pear php5-ldap php-auth php5-mysql php5-common \   
+       &ensp; &ensp; libapache2-mod-php5 && apt-get clean  
  
 2. que le nom du serveur à créer soit MatheuxEstGenial en le mettant dans la commande 
     commançant par `RUN sed`,
@@ -164,17 +164,17 @@ telnet 172.17.0.3 80
 Pour que le chemin ‘/site’ soit envoyé sur le serveur apache, 
 on peut modifier le fichier `/docker/nginx/config/nginx/conf.d/default.conf` en y ajoutant
 > location /site {  
-	&ensp; proxy_pass http://172.17.0.3/;  
+	&ensp; &ensp; proxy_pass http://172.17.0.3/;  
 > } 
 
-Maintenant après avoir relancé le container nginx, 
+Maintenant après avoir relancé le container `nginx`, 
 on peut visiter le site `http://192.168.76.13/site` et c’est le serveur apache qui répond.  
   
 On peut demander d’afficher les informations du serveur en créant une page `index.php` 
 dans le répertoire partagé `/docker/apache/html/` et en y mettant
 > <?php  
-    &ensp; echo "Salut les matheux !";  
-    &ensp; phpinfo();  
+    &ensp; &ensp; echo "Salut les matheux !";  
+    &ensp; &ensp; phpinfo();  
 > ?>
 
 Quand on renouvelle le site web, on peut y constater 
@@ -188,17 +188,94 @@ Quand on renouvelle le site web, on peut y constater
 
 ## III. Utilisation du réseau
 
-```python
-@requires_authorization
-class SomeClass:
-    pass
-
-if __name__ == '__main__':
-    # A comment
-    print 'hello world'
+Afin de rendre possible l’affectation d’une adresse IP de notre choix au container, 
+il faut d’abord créer un réseau autre que celui par défaut
+```bash
+$ docker network create --subnet 172.18.100.0/24 interne
 ```
+On peut maitenant supprimer l’ancien container `apache` et en créer deux nouveaux dans ce réseau
+```bash
+$ docker rm -f apache
+$ docker run -d --name alsaxian1 --hostname alsaxian1 -v /docker/apache/html/:/var/www/html/ --net interne --ip 172.18.100.10 ubuntuapache:v1
+$ docker run -d --name alsaxian2 --hostname alsaxian2 -v /docker/apache/html/:/var/www/html/ --net interne --ip 172.18.100.11 ubuntuapache:v1
+```
+Puis on supprime aussi l’ancien docker `nginx` et le recréer en ajoutant à son fichier hosts les containers `apache`
+```bash
+$ docker run -d --name nginx --hostname nginx -p 80:80 -p 443:443 -v /docker/nginx/config/nginx:/etc/nginx --add-host "alsaxian1:172.18.100.10" --add-host "alsaxian2:172.18.100.11" nginx
+```
+On le connecte ensuite avec le nouveau réseau
+```bash
+$ docker network connect interne nginx
+```
+avec la commande
+```bash
+$ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx
+```
+On voit bien que le container est à la fois dans les deux réseaux (celui par défaut et celui créé par l’utilisateur).  
+  
+On peut trouver ces dockers au sein de la VM p. ex. avec une commande `telnet`. 
+Par contre une autre VM ne peut pas y avoir accès sauf faire des ssh enchaînés de façon à se connecter 
+d’abord à la VM actuelle, puisque ces réseaux-là sont internes à la VM.  
+  
+En ajoutant cette partie 
+> location /site1 {
+    &ensp; &ensp;	proxy_pass http://172.18.100.10/;
+> }
+> location /site2 {
+    &ensp; &ensp;	proxy_pass http://172.18.100.11/;
+> }
 
-### 4. 高效绘制 [流程图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图)
+au fichier `/docker/nginx/config/nginx/conf.d/default.conf` et après avoir relancé `nginx`, 
+on peut visiter les deux serveurs dans le navigateur resp. à 
+[http://192.168.76.13/site1](http://192.168.76.13/site1) et [http://192.168.76.13/site2](http://192.168.76.13/site2].
+
+
+
+
+
+### IV. Equilibrage de charge
+
+Afin que le charge de requêtes de nginx soit réparti de façon alternée sur les deux serveurs apache, 
+on ajoute au fichier `/docker/nginx/config/nginx/conf.d/default.conf`, dans "location / {...}"
+> proxy_pass http://project;
+
+et au fichier `/docker/nginx/config/nginx/nginx.conf`
+> upstream project {
+    &ensp; &ensp;	server 172.18.100.10;
+    &ensp; &ensp;	server 172.18.100.11;
+}
+
+Ensuite pour différencier bien les deux sites on crée sous `/docker/apache/html` un site web `test.php` qui contient
+> <?php
+    &ensp; &ensp;	echo "<pre>".print_r($_SERVER, true)."</pre>";
+?>
+
+En appelant l’adresse [http://192.168.76.13/test.php](http://192.168.76.13/test.php) plusieurs fois, 
+on peut constater que les requêtes sont bien prises en charges par les deux serveurs apache de façon alternées. 
+La variable permettant de détecter le container visité c’est `[SERVER_ADDR]`.
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+
+  
+  
+
+
+  
+
+  
 
 ```flow
 st=>start: Start
