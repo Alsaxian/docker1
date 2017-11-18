@@ -136,8 +136,8 @@ Après, on va modifier le Dockerfile de façon
    
 1. qu’il installera les modules nécessaire, en changeant la ligne d’installation à
     > RUN  apt-get update && apt-get -y install apache2 \  
-    >    php-pear php5-ldap php-auth php5-mysql php5-common \   
-    >    libapache2-mod-php5 && apt-get clean  
+        > php-pear php5-ldap php-auth php5-mysql php5-common \   
+        > libapache2-mod-php5 && apt-get clean  
  
 2. que le nom du serveur à créer soit MatheuxEstGenial en le mettant dans la commande 
     commançant par `RUN sed`,
@@ -164,7 +164,7 @@ telnet 172.17.0.3 80
 Pour que le chemin ‘/site’ soit envoyé sur le serveur apache, 
 on peut modifier le fichier `/docker/nginx/config/nginx/conf.d/default.conf` en y ajoutant
 > location /site {  
->	proxy_pass http://172.17.0.3/;  
+	> proxy_pass http://172.17.0.3/;  
 > } 
 
 Maintenant après avoir relancé le container nginx, 
@@ -173,8 +173,8 @@ on peut visiter le site `http://192.168.76.13/site` et c’est le serveur apache
 On peut demander d’afficher les informations du serveur en créant une page `index.php` 
 dans le répertoire partagé `/docker/apache/html/` et en y mettant
 > <?php  
->	 echo "Salut les matheux !";  
->	 phpinfo();  
+    > echo "Salut les matheux !";  
+    > phpinfo();  
 > ?>
 
 Quand on renouvelle le site web, on peut y constater 
