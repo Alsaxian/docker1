@@ -30,7 +30,7 @@ ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.
 - [x] Lancement d'un premier docker container d'essai avec l'attachement des ports 
 - [x] Recherche de sa position et sa structure dans le system de fichiers de l'hôte
 - [x] Création d'un nouveau container avec un volume partagé
-- [x] Test du fonctionnement du volume partagé  
+- [x] Test de fonctionnement du volume partagé  
 
  &ensp; &ensp;  
      
