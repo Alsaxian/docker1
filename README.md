@@ -19,11 +19,11 @@ ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.
   
 ## I. Installation d'un docker nginx
 
-- [ ] 支持以 PDF 格式导出文稿
-- [x] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率
-- [x] 新增 Todo 列表功能
-- [x] 修复 LaTex 公式渲染问题
-- [x] 新增 LaTex 公式编号功能
+- [x] Sélection et téléchargement d'une docker image nginx sur dockerhub 
+- [x] Lancement d'un premier docker container d'essai avec l'attachement des ports 
+- [x] Recherche de sa position et sa structure dans le system de fichiers de l'hôte
+- [x] Création d'un nouveau container avec un volume partagé
+- [x] Test du fonctionnement du volume partagé  
 
 On va d’abord trouver la bonne version de docker ```nginx``` qu’on va utiliser par la suite. 
 Pour le faire, on peut taper
@@ -157,7 +157,7 @@ $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{en
 ```
 Le système répond `172.17.0.3`.
 
-On peut aussi tester le fonctionnement du container par une commande telnet
+On peut aussi tester le fonctionnement du container par une commande `telnet`
 ```bash
 telnet 172.17.0.3 80
 ```
