@@ -5,20 +5,26 @@ Promotion : Data Science Math
 L'adresse IP de la machine virtuelle : [http://192.168.76.13/](http://192.168.76.13/)   
 Date : 16 nov. 2017   
 
-[TOC]
-
+ &ensp; &ensp;  
+ &ensp; &ensp;  
+  
 ## 0. Préparation d'une machine virtuelle avec Docker
+ &ensp; &ensp;  
+   
 En premier temps, on monte une VM avec docker pré-installé sur Openstack. 
 Après passer en root afin de faciliter la saisie de commandes, 
 on vérifie l’installation de docker sur la VM avec
 ```sh
 $ docker version
 ```
-ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.
-  
-  
+ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.  
+
+   &ensp; &ensp;    
+ &ensp; &ensp;  
+    
 ## I. Installation d'un docker nginx
   
+   &ensp; &ensp;  
   
 - [x] Sélection et téléchargement d'une docker image nginx sur dockerhub 
 - [x] Lancement d'un premier docker container d'essai avec l'attachement des ports 
@@ -26,7 +32,8 @@ ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.
 - [x] Création d'un nouveau container avec un volume partagé
 - [x] Test du fonctionnement du volume partagé  
 
-  
+ &ensp; &ensp;  
+     
 On va d’abord trouver la bonne version de docker ```nginx``` qu’on va utiliser par la suite. 
 Pour le faire, on peut taper
 ```sh
@@ -121,16 +128,22 @@ $ docker logs -f nginx
 que le message d’erreurs est maintenant personnalisé, ce qui montre le bon fonctionnement 
 du répertoire partagé entre le container et la VM.
 
-
+ &ensp; &ensp;  
+ &ensp; &ensp;  
+  
 ## II. Installation d'un docker apache
   
-  
+   &ensp; &ensp;  
+     
 - [x] Construction d'un docker image à partir d'un Dockerfile 
 - [x] Personnalisation du Dockerfile 
 - [x] Création d'un container apache et attachement de celui-ci au serveur nginx
 - [x] Transfert de requêtes des certains sites web du serveur nginx au serveur apache
  
+ 
 
+&ensp; &ensp;  
+   
   
 On télécharger d’abord le Dockerfile sous le nouveau répertoire `/docker/monApache`
 ```bash
@@ -194,17 +207,20 @@ Quand on renouvelle le site web, on peut y constater
 2. que le chemin de la page web utilisé (`DOCUMENT_ROOT`) est `/var/www/html` et
 3. que l'adresse du client (`REMOTE_ADDR`) est `172.17.0.2`. 
 
-
-
+ &ensp; &ensp;  
+ &ensp; &ensp;  
+  
 ## III. Utilisation du réseau
   
-  
+   &ensp; &ensp;  
+    
 - [x] Création d'un réseau utilisateur
 - [x] Création de deux docker containers apache dans ce réseau avec affectation d'adresses IP personnalisées  
 - [x] Connecton du docker container nginx du réseau par défaut dans ce réseau
 - [x] Transfert des requêtes de certaines pages web respectivement aux deux serveurs apache
 
-
+ &ensp; &ensp;  
+  
   
 Afin de rendre possible l’affectation d’une adresse IP de notre choix au container, 
 il faut d’abord créer un réseau autre que celui par défaut
@@ -253,15 +269,14 @@ on peut visiter les deux serveurs dans le navigateur resp. à
  &ensp; &ensp;  
    
 ### IV. Equilibrage de charge
-  
- &ensp; &ensp;    
- &ensp; &ensp;  
+      
+&ensp; &ensp;  
    
 - [x] Partage de charge de façon alternée par les deux serveurs apache indépendemment des requêtes
    
  
+   
 
-&ensp; &ensp;    
 &ensp; &ensp;   
    
  
