@@ -18,13 +18,15 @@ ce qui vous renvoie le numéro de sa version et assure son bon fonctionnement.
   
   
 ## I. Installation d'un docker nginx
-
+  
+  
 - [x] Sélection et téléchargement d'une docker image nginx sur dockerhub 
 - [x] Lancement d'un premier docker container d'essai avec l'attachement des ports 
 - [x] Recherche de sa position et sa structure dans le system de fichiers de l'hôte
 - [x] Création d'un nouveau container avec un volume partagé
 - [x] Test du fonctionnement du volume partagé  
 
+  
 On va d’abord trouver la bonne version de docker ```nginx``` qu’on va utiliser par la suite. 
 Pour le faire, on peut taper
 ```sh
@@ -121,7 +123,15 @@ du répertoire partagé entre le container et la VM.
 
 
 ## II. Installation d'un docker apache
+  
+  
+- [x] Construction d'un docker image partir d'un Dockerfile 
+- [x] Personnalisation du Dockerfile 
+- [x] Création d'un containers apache et attachement de celui-ci au serveur nginx
+- [x] Test de son fonctionnement avec la visite de la page web dont s'occupe le serveur apache à travers le serveur nginx
+ 
 
+  
 On télécharger d’abord le Dockerfile sous le nouveau répertoire `/docker/monApache`
 ```bash
 $ mkdir /docker/monApache
@@ -187,7 +197,15 @@ Quand on renouvelle le site web, on peut y constater
 
 
 ## III. Utilisation du réseau
+  
+  
+- [x] Création d'un réseau utilisateur
+- [x] Lancement d'un premier docker container d'essai avec l'attachement des ports 
+- [x] Recherche de sa position et sa structure dans le system de fichiers de l'hôte
+- [x] Création d'un nouveau container avec un volume partagé
+- [x] Test du fonctionnement du volume partagé  
 
+  
 Afin de rendre possible l’affectation d’une adresse IP de notre choix au container, 
 il faut d’abord créer un réseau autre que celui par défaut
 ```bash
