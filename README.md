@@ -27,9 +27,9 @@ ce qui nous renvoie le numéro de sa version et en plus nous confirme son bon fo
   
    &ensp; &ensp;  
   
-- [x] Sélection et téléchargement d'une docker image nginx sur dockerhub 
+- [x] Sélection et téléchargement d'un docker image nginx sur dockerhub 
 - [x] Lancement d'un premier docker container d'essai avec l'attachement des ports 
-- [x] Recherche de sa position et sa structure dans le system de fichiers de l'hôte
+- [x] Recherche de sa position et sa structure dans le systeme de fichiers de l'hôte
 - [x] Création d'un nouveau container avec un volume partagé
 - [x] Test de fonctionnement du volume partagé  
 
@@ -40,14 +40,14 @@ Pour le faire, on peut taper
 ```sh
 $ docker search --stars=3 --no-trunc nginx
 ```
-qui va chercher par défaut sur dockerhub et puis afficher toutes les docker images disponibles 
+qui va chercher par défaut sur dockerhub et puis afficher tous les docker images disponibles 
 portant le nom ```nginx```, ayant au moins 3 étoiles accompagnées d’une description non-tronquée. 
 On voit bien en tête de cette liste l’image officielle avec 7219 étoiles au moment de la rédaction de ce rapport.  
   
 Pour trouver des informations sur ses différentes versions, 
 on peut aller sur [dockerhub](http://dockerhub.com) et lire la documentation docker de ```nginx```, 
 où on peut reconnaître sa dernière version ```1.13.6``` par l'étiquette ```latest```. 
-D’ailleurs la différence entre la version principale et celle de Perl consiste en 
+D’ailleurs la différence entre la version principale et celle de Perl apparaît  en 
 la ligne 31 du fichier ```Dockerfile``` de cette dernière, où il ajoute le module Perl avec
 > nginx-module-perl=${NGINX_VERSION} 
 
@@ -56,7 +56,7 @@ la dernière version de ```nginx``` en saisissant la commande
 ```bash
 $ docker pull nginx
 ```
-Pour vérifier que le téléchargement de l’image était bonne, on peut taper
+Pour vérifier que le téléchargement de l’image était bon, on peut taper
 ```bash
 $ docker images nginx
 ```
@@ -85,7 +85,7 @@ $ cat /toto
 ```
 ce qui nous affichera "coucou".  
   
-Après sortir du container, on essaie maintenant de retrouver ce message dans notre VM. 
+Après avoir sortir du container, on essaie maintenant de retrouver ce message dans notre VM. 
 On peut saisir la commande suivante dans le terminal pour extraire le chemin vers 
 le driver overlay2 du container dans la VM.
 ```bash
@@ -114,7 +114,7 @@ on garde d’abord une copie du répertoire de configuration du présent contain
 $ mkdir -p /docker/nginx/config
 $ docker cp test:/etc/nginx /docker/nginx/config
 ```
-Ensuite on supprime le container test et en créer un nouveau avec un répertoire partagé
+Ensuite on supprime le container test et on crée un nouveau avec un répertoire partagé
 ```bash
 $ docker rm -f test
 $ docker run -d --name nginx --hostname nginx -p 80:80 -p 443:443 -v /docker/nginx/config/nginx:/etc/nginx nginx
@@ -136,17 +136,17 @@ du répertoire partagé entre le container et la VM.
   
    &ensp; &ensp;  
      
-- [x] Construction d'une docker image à partir d'un Dockerfile 
+- [x] Construction d'un docker image à partir d'un Dockerfile 
 - [x] Personnalisation du Dockerfile 
 - [x] Création d'un container apache et attachement de celui-ci au container nginx
-- [x] Transfert de requêtes des certains sites web du serveur nginx au serveur apache
+- [x] Transfert de requêtes de certains sites web du serveur nginx au serveur apache
  
  
 
 &ensp; &ensp;  
    
   
-On télécharger d’abord le Dockerfile sous le nouveau répertoire `/docker/monApache`
+On télécharge d’abord le Dockerfile sous le nouveau répertoire `/docker/monApache`
 ```bash
 $ mkdir /docker/monApache
 $ wget -O /docker/monApache/Dockerfile http://perso.univ-lyon1.fr/fabien.rico/site/_media/cloud:dockerfile_apache-tp2.txt  
@@ -158,7 +158,7 @@ $ docker build -t ubuntuapache:v0 /docker/monApache/
 
 Après, on va modifier le Dockerfile de façon   
    
-1. qu’il installera les modules nécessaire, en changeant la ligne d’installation à
+1. qu’il installe les modules nécessaires, en changeant la ligne d’installation à
     > RUN  apt-get update && apt-get -y install apache2 \  
        &ensp; &ensp; php-pear php5-ldap php-auth php5-mysql php5-common \   
        &ensp; &ensp; libapache2-mod-php5 && apt-get clean  
@@ -166,11 +166,11 @@ Après, on va modifier le Dockerfile de façon
 2. que le nom du serveur à créer soit MatheuxEstGenial en le mettant dans la commande 
     commançant par `RUN sed` et
     
-3. que l'affichage des erreurs php soit activé, en ajoutant dans le fichier une ligne
+3. que l'affichage des erreurs php soit activée, en ajoutant dans le fichier une ligne
     > RUN sed -ie 's/display_errors = Off/display_errors = On/' /etc/php5/apache2/php.ini
         
 
-Puis on recrée une docker image à partir de ce Dockerfile et on va en lancer un container apache
+Puis on recrée une docker image à partir de ce Dockerfile puis on va en lancer un container apache
 ```bash
 $ docker build -t ubuntuapache:v1 /docker/monApache/
 $ docker run -d --name apache --hostname apache -v /docker/apache/html/:/var/www/html/ ubuntuapache:v1
@@ -285,7 +285,7 @@ on peut visiter les deux serveurs dans le navigateur resp. à
 
 
 
-Afin que le charge de requêtes de nginx soit réparti de façon alternée sur les deux serveurs apache, 
+Afin que la charge des requêtes de nginx soit répartie de façon alternée sur les deux serveurs apache, 
 on ajoute au fichier `/docker/nginx/config/nginx/conf.d/default.conf`, dans "location / {...}"
 > proxy_pass http://project;
 
@@ -295,14 +295,14 @@ et au fichier `/docker/nginx/config/nginx/nginx.conf`
 >    &ensp; &ensp;	server 172.18.100.11;  
 > }
 
-Ensuite pour différencier bien les deux sites on crée sous `/docker/apache/html` un site web `test.php` qui contient
+Ensuite pour bien différencier les deux sites on crée sous `/docker/apache/html` un site web `test.php` qui contient
 > <?php  
 >    &ensp; &ensp;	echo "\<pre\>".print_r($_SERVER, true)."\</pre\>";  
 > ?>
 
 En appelant l’adresse [http://192.168.76.13/test.php](http://192.168.76.13/test.php) plusieurs fois, 
-on peut constater que les requêtes sont bien prises en charges par les deux serveurs apache de façon alternées. 
-La variable permettant de détecter le container visité c’est `[SERVER_ADDR]`.
+on peut constater que les requêtes sont bien prises en charges par les deux serveurs apache de façon alternée. 
+La variable permettant de détecter le container visité est:  `[SERVER_ADDR]`.
 
 
 
