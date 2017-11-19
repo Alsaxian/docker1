@@ -1,6 +1,7 @@
 # Rapport du TP Utilisation de Docker
 
-Binôme : KIAMPAMBA H'APELE Swarth-Elia et YANG Xian   
+Binôme : SwarthXian   
+Membres : KIAMPAMBA H'APELE Swarth-Elia et YANG Xian    
 Promotion : Data Science Maths      
 L'adresse IP de la machine virtuelle : [http://192.168.76.13/](http://192.168.76.13/)   
 Date : 16 nov. 2017   
