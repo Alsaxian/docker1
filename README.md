@@ -29,7 +29,7 @@ ce qui nous renvoie le numéro de sa version et en plus nous confirme son bon fo
   
 - [x] Sélection et téléchargement d'un docker image nginx sur dockerhub 
 - [x] Lancement d'un premier docker container d'essai avec l'attachement des ports 
-- [x] Recherche de sa position et sa structure dans le systeme de fichiers de l'hôte
+- [x] Recherche de sa position et sa structure dans le système de fichiers de l'hôte
 - [x] Création d'un nouveau container avec un volume partagé
 - [x] Test de fonctionnement du volume partagé  
 
@@ -47,7 +47,7 @@ On voit bien en tête de cette liste l’image officielle avec 7219 étoiles au 
 Pour trouver des informations sur ses différentes versions, 
 on peut aller sur [dockerhub](http://dockerhub.com) et lire la documentation docker de ```nginx```, 
 où on peut reconnaître sa dernière version ```1.13.6``` par l'étiquette ```latest```. 
-D’ailleurs la différence entre la version principale et celle de Perl apparaît  en 
+D’ailleurs la différence entre la version principale et celle de Perl apparaît en 
 la ligne 31 du fichier ```Dockerfile``` de cette dernière, où il ajoute le module Perl avec
 > nginx-module-perl=${NGINX_VERSION} 
 
@@ -85,7 +85,7 @@ $ cat /toto
 ```
 ce qui nous affichera "coucou".  
   
-Après avoir sortir du container, on essaie maintenant de retrouver ce message dans notre VM. 
+Après être sorti du container, on essaie maintenant de retrouver ce message dans notre VM. 
 On peut saisir la commande suivante dans le terminal pour extraire le chemin vers 
 le driver overlay2 du container dans la VM.
 ```bash
@@ -114,7 +114,7 @@ on garde d’abord une copie du répertoire de configuration du présent contain
 $ mkdir -p /docker/nginx/config
 $ docker cp test:/etc/nginx /docker/nginx/config
 ```
-Ensuite on supprime le container test et on crée un nouveau avec un répertoire partagé
+Ensuite on supprime le container `test` et on en crée un nouveau avec un répertoire partagé
 ```bash
 $ docker rm -f test
 $ docker run -d --name nginx --hostname nginx -p 80:80 -p 443:443 -v /docker/nginx/config/nginx:/etc/nginx nginx
@@ -166,11 +166,11 @@ Après, on va modifier le Dockerfile de façon
 2. que le nom du serveur à créer soit MatheuxEstGenial en le mettant dans la commande 
     commançant par `RUN sed` et
     
-3. que l'affichage des erreurs php soit activée, en ajoutant dans le fichier une ligne
+3. que l'affichage des erreurs php soit activé, en ajoutant dans le fichier une ligne
     > RUN sed -ie 's/display_errors = Off/display_errors = On/' /etc/php5/apache2/php.ini
         
 
-Puis on recrée une docker image à partir de ce Dockerfile puis on va en lancer un container apache
+Puis on recrée un docker image à partir de ce Dockerfile puis on va en lancer un container `apache`
 ```bash
 $ docker build -t ubuntuapache:v1 /docker/monApache/
 $ docker run -d --name apache --hostname apache -v /docker/apache/html/:/var/www/html/ ubuntuapache:v1
