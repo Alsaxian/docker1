@@ -17,7 +17,7 @@ on vérifie l’installation de docker sur la VM avec
 ```sh
 $ docker version
 ```
-ce qui nous renvoie le numéro de sa version et assure son bon fonctionnement.  
+ce qui nous renvoie le numéro de sa version, ce qui nous assure son bon fonctionnement.  
 
    &ensp; &ensp;    
  &ensp; &ensp;  
@@ -135,9 +135,9 @@ du répertoire partagé entre le container et la VM.
   
    &ensp; &ensp;  
      
-- [x] Construction d'un docker image à partir d'un Dockerfile 
+- [x] Construction d'une docker image à partir d'un Dockerfile 
 - [x] Personnalisation du Dockerfile 
-- [x] Création d'un container apache et attachement de celui-ci au serveur nginx
+- [x] Création d'un container apache et attachement de celui-ci au container nginx
 - [x] Transfert de requêtes des certains sites web du serveur nginx au serveur apache
  
  
@@ -163,7 +163,7 @@ Après, on va modifier le Dockerfile de façon
        &ensp; &ensp; libapache2-mod-php5 && apt-get clean  
  
 2. que le nom du serveur à créer soit MatheuxEstGenial en le mettant dans la commande 
-    commançant par `RUN sed`,
+    commançant par `RUN sed` et
     
 3. que l'affichage des erreurs php soit activé, en ajoutant dans le fichier une ligne
     > RUN sed -ie 's/display_errors = Off/display_errors = On/' /etc/php5/apache2/php.ini
@@ -178,7 +178,7 @@ On peut demander son adresse IP dans le réseau interne par défaut
 ```bash
 $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' apache
 ```
-Le système répond `172.17.0.3`.
+à la quelle le système répond `172.17.0.3`.
 
 On peut aussi tester le fonctionnement du container par une commande `telnet`
 ```bash
@@ -230,12 +230,12 @@ $ docker network create --subnet 172.18.100.0/24 interne
 On peut maitenant supprimer l’ancien container `apache` et en créer deux nouveaux dans ce réseau
 ```bash
 $ docker rm -f apache
-$ docker run -d --name alsaxian1 --hostname alsaxian1 -v /docker/apache/html/:/var/www/html/ --net interne --ip 172.18.100.10 ubuntuapache:v1
-$ docker run -d --name alsaxian2 --hostname alsaxian2 -v /docker/apache/html/:/var/www/html/ --net interne --ip 172.18.100.11 ubuntuapache:v1
+$ docker run -d --name swarth_elia --hostname swarth_elia -v /docker/apache/html/:/var/www/html/ --net interne --ip 172.18.100.10 ubuntuapache:v1
+$ docker run -d --name xian --hostname xian -v /docker/apache/html/:/var/www/html/ --net interne --ip 172.18.100.11 ubuntuapache:v1
 ```
 Puis on supprime aussi l’ancien docker `nginx` et le recréer en ajoutant à son fichier hosts les containers `apache`
 ```bash
-$ docker run -d --name nginx --hostname nginx -p 80:80 -p 443:443 -v /docker/nginx/config/nginx:/etc/nginx --add-host "alsaxian1:172.18.100.10" --add-host "alsaxian2:172.18.100.11" nginx
+$ docker run -d --name nginx --hostname nginx -p 80:80 -p 443:443 -v /docker/nginx/config/nginx:/etc/nginx --add-host "swarth_elia:172.18.100.10" --add-host "xian:172.18.100.11" nginx
 ```
 On le connecte ensuite avec le nouveau réseau
 ```bash
