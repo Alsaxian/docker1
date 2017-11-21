@@ -54,11 +54,33 @@ GENERATED ROOT PASSWORD: pahb8weibei6ua4Oog3gai0Un2chohcu
 ```
 puis 
 ```sh
-docker exec -it matheuAimeMysql mysql -u root -p  
+$ docker exec -it matheuAimeMysql mysql -u root -p  
 ```
 en tapant le mot de passe obtenu, on est entré sous mode mysql. Vérifions maintenant qu'on a bien démarré le container : 
-```
-mysql> mysql> show tables;
+```sh
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| tiny               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use tiny; show tables;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
++----------------+
+| Tables_in_tiny |
++----------------+
+| song           |
++----------------+
+1 row in set (0.00 sec)
 ```
 
 
