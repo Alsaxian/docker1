@@ -1,4 +1,4 @@
-# Rapport du TP Utilisation de Docker
+# Rapport du TP Utilisation de Docker (suite)
   
   
 __Nous avons travaillé ce TP sur Gitlab de Lyon 1. Ainsi, pour avoir le meilleur effet d'affichage de ce rapport dans l'environnement Markdown, veuillez vous rendre à l'adresse suivante__ [https://forge.univ-lyon1.fr/p1715490/tp-cloud-docker/](https://forge.univ-lyon1.fr/p1715490/tp-cloud-docker/).  
@@ -113,8 +113,6 @@ mysql> show tables;
 +----------------+
 1 row in set (0.00 sec)
 
-mysql> select * from songs;
-ERROR 1146 (42S02): Table 'tiny.songs' doesn't exist
 mysql> select * from song;
 ```
 Et `mysql` renvoie la table des 30 chansons dans l'enregistrement.
