@@ -56,7 +56,7 @@ puis
 ```sh
 $ docker exec -it matheuAimeMysql mysql -u root -p  
 ```
-en tapant le mot de passe obtenu, on est entré sous mode mysql. Vérifions maintenant qu'on a bien démarré le container : 
+en tapant le mot de passe obtenu, on est entré sous mode mysql. Vérifions maintenant qu'on a bien démarré le container avec les base de données qu'on voulait importer : 
 ```sh
 mysql> show databases;
 +--------------------+
@@ -81,7 +81,43 @@ Database changed
 | song           |
 +----------------+
 1 row in set (0.00 sec)
+
+mysql> exit
+Bye
 ```
+Maintenant vérifions également l'accessibilité réduite de l'utilisateur `user` :
+```sh
+$ docker exec -it matheuAimeMysql mysql -u usertiny -p  
+```
+En rentrant le mot de passe "passtiny", cet utilisateur doit pouvoir accéder à la base de données `tiny`.
+```sh
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| tiny               |
++--------------------+
+2 rows in set (0.00 sec)
+
+mysql> use tiny;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_tiny |
++----------------+
+| song           |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from songs;
+ERROR 1146 (42S02): Table 'tiny.songs' doesn't exist
+mysql> select * from song;
+```
+Et `mysql` renvoie la table des 30 chansons dans l'enregistrement.
 
 
 
