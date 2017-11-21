@@ -25,23 +25,41 @@ RUN  chmod a+x /usr/local/bin/apache2-foreground
 CMD ["/usr/local/bin/apache2-foreground"]  
 
 Et on ajoute dans le même répertoire un fichier `apache2-foreground` qui provient de [cette archive](http://perso.univ-lyon1.fr/fabien.rico/site/_media/cloud:dockerfile_apache.zip).
+```sh
+$ wget http://perso.univ-lyon1.fr/fabien.rico/site/_media/cloud:dockerfile_apache.zip 
+$ apt-get install unzip
+$ unzip cloud:dockerfile_apache.zip 
+$ mv ...
+...
+```
+
 Après avoir recréé les containers, on peut maintenant les relancer sans souci.  
-apt-get install
-wget 
-unzip
+
 ## VI. Installation d'une application
-wget 
-unzip  
+```sh
+$ wget http://perso.univ-lyon1.fr/fabien.rico/site/_media/cloud:2016:master.zip
+$ unzip cloud:2016:master.zip
+
+``` 
+ 
 ### VI.1 Installation de mysql
 no pull, directly  
-docker run -d -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_DATABASE=tiny -e MYSQL_USER=usertiny -e MYSQL_PASSWORD=passtiny -v /root/tiny-master/_installation/:/docker-entrypoint-initdb.d/ -p 3306:3306 --net interne --ip 172.18.100.20 --name matheuAimeMysql mysql
-  
-then docker logs matheuAimeMysql 2>/dev/null | grep "GENERATED ROOT PASSWORD"  
-le système répond GENERATED ROOT PASSWORD: pahb8weibei6ua4Oog3gai0Un2chohcu  
-puis docker exec -it matheuAimeMysql mysql -u root -p  
-en tapant le mot de passe obtenu, on est entré sous mode mysql   
+```sh
+$ docker run -d -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_DATABASE=tiny -e MYSQL_USER=usertiny -e MYSQL_PASSWORD=passtiny -v /root/tiny-master/_installation/:/docker-entrypoint-initdb.d/ -p 3306:3306 --net interne --ip 172.18.100.20 --name matheuAimeMysql mysql
+```  
+then 
+```sh
+$ docker logs matheuAimeMysql 2>/dev/null | grep "GENERATED ROOT PASSWORD"
+GENERATED ROOT PASSWORD: pahb8weibei6ua4Oog3gai0Un2chohcu 
+```
+puis 
+```sh
+docker exec -it matheuAimeMysql mysql -u root -p  
+```
+en tapant le mot de passe obtenu, on est entré sous mode mysql. Vérifions maintenant qu'on a bien démarré le container : 
+```
 mysql> mysql> show tables;
-
+```
 
 
 
