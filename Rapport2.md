@@ -116,7 +116,23 @@ mysql> show tables;
 mysql> select * from song;
 ```
 Et `mysql` renvoie la table des 30 chansons dans l'enregistrement.
+  
+  
 
+pusher congis dans `/docker/apache/html/`...  
+  
 
+## VII. Docker compose
 
+On installe d'abord la dernière version de Docker Compose, ce qui est compatible, d'après notre vérification sur le site Github, avec le format du fichier version `2.1`.
+```sh
+$ curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
+$ docker-compose --version
+docker-compose version 1.17.1, build 6d101fb
+```
+Après avoir supprimé tous les containers qui ne conernent pas la tâche de ce TP (en effet il n'y en a pas), on éteint également ces 4 containers `mysql`, 2 `apache` et `nginx`
+```sh
+docker stop $(docker ps -a -q)
+```
 
