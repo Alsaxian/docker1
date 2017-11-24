@@ -1,0 +1,77 @@
+version: "2.1"
+
+
+services:
+
+    nginx:
+        container_name: nginx2
+        image: nginx
+        volumes:
+            - "/home/ubuntu/docker/nginx/config/nginx:/etc/nginx"
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            rescomp:
+                ipv4_address: 172.20.20.05
+        extra_hosts:
+            - "swarth_elia:172.20.20.10"
+            - "xian:172.20.20.11"
+        restart: always
+
+    web1:
+        container_name: swarth_elia2
+        depends_on:
+            - nginx
+            - db
+        build: ./dockerfileApache
+        image: ubuntuapache:v3 ## le nom que portera la nouvelle image
+        volumes:
+            - "/home/ubuntu/docker/apache/html:/var/www/html"
+        networks:
+            rescomp:
+                ipv4_address: 172.20.20.10
+        restart: always
+
+    web2:
+        container_name: xian2
+        depends_on:
+            - nginx
+            - db
+        image: ubuntuapache:v3 ## Existe déjà, pas besoin de la reconstruire.
+        volumes:
+            - "/home/ubuntu/docker/apache/html:/var/www/html"
+        networks:
+            rescomp:
+                ipv4_address: 172.20.20.11
+        restart: always
+        
+    db:
+        container_name: matheuAimeMysql2
+        image: mysql
+        volumes:
+            - "/home/ubuntu/docker/mysql/_installation:/docker-entrypoint-initdb.d"
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_RANDOM_ROOT_PASSWORD=yes
+            - MYSQL_DATABASE=tiny
+            - MYSQL_USER=usertiny
+            - MYSQL_PASSWORD=passtiny
+        networks:
+            rescomp:
+                ipv4_address: 172.20.20.20
+        restart: always
+
+
+networks:
+    rescomp:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.20.20.0/24
+                  gateway: 172.20.20.01
+
+                                                                                                                                                                            55,1-8        Bot
+
