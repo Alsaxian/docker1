@@ -136,3 +136,13 @@ Après avoir supprimé tous les containers qui ne conernent pas la tâche de ce 
 docker stop $(docker ps -a -q)
 ```
 
+```sh
+$ cp -r /docker /home/ubuntu/docker
+$ mkdir /home/ubuntu/docker/mysql
+$ cp -r /root/tiny-master/_installation /home/ubuntu/docker/mysql/_installation
+```
+
+Dans le répertoire où il y a le fichier `docker-compose.yml`
+```sh
+$ docker-compose up -d
+```
