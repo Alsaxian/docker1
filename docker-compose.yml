@@ -7,7 +7,7 @@ services:
         container_name: nginx2
         image: nginx
         volumes:
-            - "/home/ubuntu/docker/nginx/config/nginx:/etc/nginx"
+            - "/home/ubuntu/compose/docker/nginx/config/nginx:/etc/nginx"
         ports:
             - "80:80"
             - "443:443"
@@ -27,7 +27,7 @@ services:
         build: ../docker/dockerfileApache
         image: ubuntuapache:v3 ## le nom que portera la nouvelle image
         volumes:
-            - "/home/ubuntu/docker/apache/html:/var/www/html"
+            - "/home/ubuntu/compose/docker/apache/html:/var/www/html"
         networks:
             rescomp:
                 ipv4_address: 172.20.20.10
@@ -40,7 +40,7 @@ services:
             - db
         image: ubuntuapache:v3 ## Existe déjà, pas besoin de la reconstruire.
         volumes:
-            - "/home/ubuntu/docker/apache/html:/var/www/html"
+            - "/home/ubuntu/compose/docker/apache/html:/var/www/html"
         networks:
             rescomp:
                 ipv4_address: 172.20.20.11
@@ -50,14 +50,14 @@ services:
         container_name: matheuAimeMysql2
         image: mysql
         volumes:
-            - "/home/ubuntu/docker/mysql/_installation:/docker-entrypoint-initdb.d"
+            - "/home/ubuntu/compose/docker/mysql/_installation:/docker-entrypoint-initdb.d"
         ports:
             - "3306:3306"
         environment:
-            - MYSQL_RANDOM_ROOT_PASSWORD=yes
+            - MYSQL_ROOT_PASSWORD=mdproot
             - MYSQL_DATABASE=tiny
-            - MYSQL_USER=usertiny
-            - MYSQL_PASSWORD=passtiny
+            - MYSQL_USER=tiny
+            - MYSQL_PASSWORD=mdptiny
         networks:
             rescomp:
                 ipv4_address: 172.20.20.20
