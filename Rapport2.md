@@ -179,9 +179,12 @@ $ cp -r /root/tiny-master/_installation /home/ubuntu/compose/docker/mysql/_insta
 ```
 
 Ensuite on doit encore changer les adresses IP internes des 3 dockers (les deux `apache`s et `mysql`) vers la bonne plage (`172.20.20.0/24`)
-comme il est demandé dans l'énoncé dans tous les fichiers de configuration où il faut.  
+comme il est demandé dans l'énoncé dans tous les fichiers de configuration où il faut (`/home/ubuntu/compose/docker/apache/html/tiny/application/config/nginx.conf`,
+`/home/ubuntu/compose/docker/nginx/config/nginx/conf.d/default.conf`, `/home/ubuntu/compose/docker/apache/html/tiny/application/config/config.php`). 
+On change d'ailleurs aussi le nom et le mot de passe de l'utilisateur 
+de la base de données dans le fichier de configuration d'apache `/home/ubuntu/compose/docker/apache/html/tiny/application/config/config.php`.  
   
-une fois toutes ces préparations soient faites, 
+Une fois toutes ces préparations soient faites, 
 on peut rédiger un `docker-compose.yml` directement sous le répertoire `/home/ubuntu/compose` comme étant annexé à la fin du rapport.   
    
 Dernièrement, dans le répertoire où il y a le fichier `docker-compose.yml` on l'exécute
