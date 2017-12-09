@@ -5,7 +5,7 @@ __Nous avons travaillé ce TP sur Gitlab de Lyon 1. Ainsi, pour avoir le meilleu
     
 Binôme : SwarthXian   
 Membres : KIAMPAMBA H'APELE Swarth-Elia et YANG Xian    
-Promotion : Data Science Maths      
+Promotion : Data Science Math      
 L'adresse IP de la machine virtuelle : [http://192.168.76.13/](http://192.168.76.13/)   
 Date : 20 nov. 2017   
 
@@ -15,7 +15,7 @@ Date : 20 nov. 2017
 ## V. Appache ne redémarre pas, correction du bug
  &ensp; &ensp;  
   
-Effectivement quand on veut redémarrer un container `apache`, celui-ci s'éteint et réfuse de s remettre en route après. Pour résoudre ce problème, on modifie le `Dockerfile` 
+Effectivement quand on veut redémarrer un container `apache`, celui-ci s'éteint et réfuse de se remettre en route après. Pour résoudre ce problème, on modifie le `Dockerfile` 
 en remplaçant la ligne 
 > CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 
