@@ -13,7 +13,7 @@ Date : 20 nov. 2017
  &ensp; &ensp;  
   
 ## V. Appache ne redémarre pas, correction du bug
- &ensp; &ensp;  
+ 
   
 Effectivement quand on veut redémarrer un container `apache`, celui-ci s'éteint et réfuse de se remettre en route après. Pour résoudre ce problème, on modifie le `Dockerfile` 
 en remplaçant la ligne 
@@ -39,7 +39,7 @@ Après avoir recréé les containers en utilisant cette nouvelle docker image, o
    &ensp; &ensp;  
    
 ## VI. Installation d'une application
- &ensp; &ensp;  
+    
  
 On récupère d'abord le `zip` du projet `tiny` sur la VM
 ```sh
@@ -164,7 +164,7 @@ le dernier lien, une liste de chansons avec leur liens dans `youtube` va s'ajout
   
 ## VII. Docker compose
 
- &ensp; &ensp;    
+    
    
 On installe d'abord la dernière version de `Docker Compose`, ce qui est compatible, 
 d'après notre vérification sur le site Github, avec le format du fichier version `2.1`.
