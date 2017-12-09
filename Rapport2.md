@@ -156,25 +156,36 @@ le dernier lien, une liste de chansons avec leur liens dans `youtube` va s'ajout
 
 ## VII. Docker compose
 
-On installe d'abord la dernière version de Docker Compose, ce qui est compatible, d'après notre vérification sur le site Github, avec le format du fichier version `2.1`.
+On installe d'abord la dernière version de `Docker Compose`, ce qui est compatible, 
+d'après notre vérification sur le site Github, avec le format du fichier version `2.1`.
 ```sh
 $ curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 $ chmod +x /usr/local/bin/docker-compose
 $ docker-compose --version
 docker-compose version 1.17.1, build 6d101fb
 ```
-Après avoir supprimé tous les containers qui ne conernent pas la tâche de ce TP (en effet il n'y en a pas), on éteint également ces 4 containers `mysql`, 2 `apache` et `nginx`
+Après avoir supprimé tous les containers qui ne conernent pas la tâche de ce TP (en effet il n'y en a pas), 
+on éteint également ces 4 containers `mysql`, 2 `apache` et `nginx`
 ```sh
 docker stop $(docker ps -a -q)
 ```
 
+Maintenant d'après l'énoncé on crée sous `/home/ubuntu/` un répertoire `compose` et y déplace tout ce qu'il faut pour `Docker Compose`
 ```sh
-$ cp -r /docker /home/ubuntu/docker
-$ mkdir /home/ubuntu/docker/mysql
-$ cp -r /root/tiny-master/_installation /home/ubuntu/docker/mysql/_installation
+$ mkdir /home/ubuntu/compose
+$ cp -r /docker /home/ubuntu/compose/docker
+$ mkdir /home/ubuntu/compose/docker/mysql
+$ cp -r /root/tiny-master/_installation /home/ubuntu/compose/docker/mysql/_installation
 ```
 
-Dans le répertoire où il y a le fichier `docker-compose.yml`
+Ensuite on doit encore changer les adresses IP internes des 3 dockers (les deux `apache`s et `mysql`) vers la bonne plage (`172.20.20.0/24`)
+comme il est demandé dans l'énoncé dans tous les fichiers de configuration où il faut.  
+  
+une fois toutes ces préparations soient faites, 
+on peut rédiger un `docker-compose.yml` directement sous le répertoire `/home/ubuntu/compose` comme étant annexé à la fin du rapport.   
+   
+Dernièrement, dans le répertoire où il y a le fichier `docker-compose.yml` on l'exécute
 ```sh
 $ docker-compose up -d
 ```
+et on retrouvera tout ce qu'on a vu dans ce TP, mais construit automatiquement à l'aide de `Docker Compose`.
