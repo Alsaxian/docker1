@@ -34,8 +34,13 @@ $ docker build -t ubuntuapache:v2 /docker/monApache/
 ```
 
 Après avoir recréé les containers en utilisant cette nouvelle docker image, on peut maintenant les relancer sans souci.  
-
+  
+   &ensp; &ensp;  
+   &ensp; &ensp;  
+   
 ## VI. Installation d'une application
+ &ensp; &ensp;  
+ 
 On récupère d'abord le `zip` du projet `tiny` sur la VM
 ```sh
 $ wget http://perso.univ-lyon1.fr/fabien.rico/site/_media/cloud:2016:master.zip
@@ -154,10 +159,13 @@ Pour que ce proxy ne change pas l'adresse IP de l'hôte lors qu'il passe la requ
 Maintenant quand on tape l'adresse IP de la VM dans notre navigateur, la page souhaitée avec une image demo et quatre liens apparaît. Si on clique ensuite 
 le dernier lien, une liste de chansons avec leur liens dans `youtube` va s'ajouter en bas de la page.
 
+ &ensp; &ensp;  
+ &ensp; &ensp;  
   
-
 ## VII. Docker compose
 
+ &ensp; &ensp;    
+   
 On installe d'abord la dernière version de `Docker Compose`, ce qui est compatible, 
 d'après notre vérification sur le site Github, avec le format du fichier version `2.1`.
 ```sh
