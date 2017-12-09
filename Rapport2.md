@@ -162,7 +162,7 @@ le dernier lien, une liste de chansons avec leur liens dans `youtube` va s'ajout
  &ensp; &ensp;  
  &ensp; &ensp;  
   
-## VII. Docker compose
+## VII. Docker Compose
 
     
    
