@@ -118,8 +118,40 @@ mysql> select * from song;
 Et `mysql` renvoie la table des 30 chansons dans l'enregistrement.
   
   
+### VI.2 Installation de tiny
+Dans un premier temps on déplace l'ancien fichier `index.php` vers `test1.php` sous le répertoire partagé des apaches `/docker/apache/html` 
+```bash
+$ mv /docker/apache/html/index.php /docker/apache/html/test1.php
+```
+et déplace tout le contenu dans le répertoire `tiny-master` sauf `_installation` vers le répertoire partagé
+```bash
+$ shopt -s extglob
+$ mv /root/tiny-master/!(_installation) /docker/apache/html/
+```
+Pour que les apaches puisssent bien trouver et se connecter en tant qu'utilisateur `usertiny` à la base de données `tiny` de `mysql`, il faut faire la condiguration 
+suivante
+```
+define('DB_TYPE', 'mysql');
+define('DB_HOST', '172.18.100.20');
+define('DB_NAME', 'tiny');
+define('DB_USER', 'usertiny');
+define('DB_PASS', 'passtiny');
+```
+dans le fichier `/docker/apache/html/application/config/config.php`.  
+  
+Finalement, on ajoute dans le fichier de configuration de `nginx` `/docker/nginx/config/nginx/conf.d/default.conf7`
+```
+    location / {
+        ...
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+```
+Pour que ce proxy ne change pas l'adresse IP de l'hôte lors qu'il passe la requête de `nginx` aux `apache`s et renvoie toujours le vrai expéditeur de la requête.  
+  
+Maintenant quand on tape l'adresse IP de la VM dans notre navigateur, la page souhaitée avec une image demo et quatre liens apparaît. Si on clique ensuite 
+le dernier lien, une liste de chansons avec leur liens dans `youtube` va s'ajouter en bas de la page.
 
-pusher congis dans `/docker/apache/html/`...  
   
 
 ## VII. Docker compose
