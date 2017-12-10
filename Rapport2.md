@@ -59,7 +59,7 @@ Puis pour récupérer le mot de passe de `root`
 $ docker logs matheuAimeMysql 2>/dev/null | grep "GENERATED ROOT PASSWORD"
 GENERATED ROOT PASSWORD: eiv6age6oboix8doiz3wue9go1meuRaH 
 ```
-puis pour se connecter en tent que `root`
+puis pour se connecter en tant que `root`
 ```sh
 $ docker exec -it matheuAimeMysql mysql -u root -p  
 ```
