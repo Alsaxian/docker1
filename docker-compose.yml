@@ -24,7 +24,7 @@ services:
         depends_on:
             - nginx
             - db
-        build: ../docker/dockerfileApache
+        build: ../docker/monApache
         image: ubuntuapache:v3 ## le nom que portera la nouvelle image
         volumes:
             - "/home/ubuntu/compose/docker/apache/html:/var/www/html"
