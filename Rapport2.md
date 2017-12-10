@@ -57,7 +57,7 @@ $ docker run -d -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_DATABASE=tiny -e MYSQ
 Puis pour récupérer le mot de passe de `root`
 ```sh
 $ docker logs matheuAimeMysql 2>/dev/null | grep "GENERATED ROOT PASSWORD"
-GENERATED ROOT PASSWORD: pahb8weibei6ua4Oog3gai0Un2chohcu 
+GENERATED ROOT PASSWORD: eiv6age6oboix8doiz3wue9go1meuRaH 
 ```
 puis pour se connecter en tent que `root`
 ```sh
