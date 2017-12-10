@@ -24,7 +24,7 @@ par
 RUN  chmod a+x /usr/local/bin/apache2-foreground  
 CMD ["/usr/local/bin/apache2-foreground"]  
 
-Et on ajoute dans le même répertoire un fichier `apache2-foreground` qui provient de [cette archive](http://perso.univ-lyon1.fr/fabien.rico/site/_media/cloud:dockerfile_apache.zip).
+et en ajoutant dans le même répertoire un fichier `apache2-foreground` qui provient de [cette archive](http://perso.univ-lyon1.fr/fabien.rico/site/_media/cloud:dockerfile_apache.zip).
 ```sh
 $ wget http://perso.univ-lyon1.fr/fabien.rico/site/_media/cloud:dockerfile_apache.zip 
 $ apt-get install unzip
