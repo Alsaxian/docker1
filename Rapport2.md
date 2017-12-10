@@ -15,7 +15,7 @@ Date : 20 nov. 2017
 ## V. Appache ne redémarre pas, correction du bug
  
   
-Effectivement quand on veut redémarrer un container `apache`, celui-ci s'éteint et réfuse de se remettre en route après. Pour résoudre ce problème, on modifie le `Dockerfile` 
+Effectivement quand on veut redémarrer un container `apache`, celui-ci s'éteint et refuse de se remettre en route après. Pour résoudre ce problème, on modifie le `Dockerfile` 
 en remplaçant la ligne 
 > CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 
