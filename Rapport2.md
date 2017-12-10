@@ -135,7 +135,7 @@ et déplace tout le contenu dans le répertoire `tiny-master` sauf `_installatio
 $ shopt -s extglob
 $ mv /root/tiny-master/!(_installation) /docker/apache/html/
 ```
-Pour que les apaches puisssent bien trouver et se connecter en tant qu'utilisateur `usertiny` à la base de données `tiny` de `mysql`, il faut faire la condiguration 
+Pour que les apaches puisssent bien trouver et se connecter en tant qu'utilisateur `usertiny` à la base de données `tiny` de `mysql`, il faut faire la configuration 
 suivante
 ```
 define('DB_TYPE', 'mysql');
@@ -144,7 +144,8 @@ define('DB_NAME', 'tiny');
 define('DB_USER', 'usertiny');
 define('DB_PASS', 'passtiny');
 ```
-dans le fichier `/docker/apache/html/application/config/config.php`.  
+dans le fichier `/docker/apache/html/application/config/config.php` et supprimer `tiny-master` à la ligne `define('URL_SUB_FOLDER', 'tiny-master');`, 
+puisque la page web `index.php` est directement sous le répertoire `html`.  
   
 Finalement, on ajoute dans le fichier de configuration de `nginx` `/docker/nginx/config/nginx/conf.d/default.conf`
 ```
