@@ -48,8 +48,8 @@ $ unzip cloud:2016:master.zip
 ``` 
  
 ### VI.1 Installation de mysql
-On souhaite télécharger la docker image `mysql` et en lancer un container, tout en spésialisant les configurations dès le démarrage. En effet, quand l'image à utiliser
-existe sur l'internet, on n'a même pas besoin de préciser le téléchargement. En revanche, on peut procéder directement à la création du container et le téléchargement
+On souhaite télécharger la docker image `mysql` et en lancer un container, tout en spécialisant les configurations dès le démarrage. En effet, quand l'image à utiliser
+existe sur internet, on n'a même pas besoin de préciser le téléchargement. En revanche, on peut procéder directement à la création du container et le téléchargement
 de l'image se fait automatiquement.
 ```sh
 $ docker run -d -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_DATABASE=tiny -e MYSQL_USER=usertiny -e MYSQL_PASSWORD=passtiny -v /root/tiny-master/_installation/:/docker-entrypoint-initdb.d/ -p 3306:3306 --net interne --ip 172.18.100.20 --name matheuAimeMysql mysql
@@ -63,7 +63,7 @@ puis pour se connecter en tant que `root`
 ```sh
 $ docker exec -it matheuAimeMysql mysql -u root -p  
 ```
-en tapant le mot de passe affiché, on est entré sous mode mysql. Vérifions maintenant qu'on a bien démarré le container avec les base de données qu'on voulait importer : 
+en tapant le mot de passe affiché, on est entré sous mode mysql. Vérifions maintenant qu'on a bien démarré le container avec les bases de données qu'on voulait importer : 
 ```sh
 mysql> show databases;
 +--------------------+
