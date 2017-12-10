@@ -122,7 +122,7 @@ mysql> show tables;
 
 mysql> select * from song;
 ```
-Et `mysql` renvoie la table des 30 chansons dans l'enregistrement.
+Et `mysql` renvoie la table des 30 chansons dans la base de données.
   
   
 ### VI.2 Installation de tiny
@@ -130,12 +130,12 @@ Dans un premier temps on déplace l'ancien fichier `index.php` vers `test1.php` 
 ```bash
 $ mv /docker/apache/html/index.php /docker/apache/html/test1.php
 ```
-et déplace tout le contenu dans le répertoire `tiny-master` sauf `_installation` vers le répertoire partagé
+et tout le contenu dans le répertoire `tiny-master` sauf `_installation` vers le répertoire partagé
 ```bash
 $ shopt -s extglob
 $ mv /root/tiny-master/!(_installation) /docker/apache/html/
 ```
-Pour que les apaches puisssent bien trouver et se connecter en tant qu'utilisateur `usertiny` à la base de données `tiny` de `mysql`, il faut faire la configuration 
+Pour que les apaches puisssent bien trouver la base de données `tiny` et s'y connecter en tant qu'utilisateur `usertiny`, il faut faire la configuration 
 suivante
 ```
 define('DB_TYPE', 'mysql');
@@ -155,10 +155,10 @@ Finalement, on ajoute dans le fichier de configuration de `nginx` `/docker/nginx
         proxy_set_header X-Real-IP $remote_addr;
     }
 ```
-Pour que ce proxy ne change pas l'adresse IP de l'hôte lors qu'il passe la requête de `nginx` aux `apache`s et renvoie toujours le vrai expéditeur de la requête.  
+Pour que ce proxy ne change pas l'adresse IP de l'hôte lorsqu'il passe la requête de `nginx` aux `apache`s et renvoie toujours le vrai expéditeur de la requête.  
   
 Maintenant quand on tape l'adresse IP de la VM dans notre navigateur, la page souhaitée avec une image demo et quatre liens apparaît. Si on clique ensuite 
-le dernier lien, une liste de chansons avec leur liens dans `youtube` va s'ajouter en bas de la page.
+sur le dernier lien, une liste de chansons avec leurs liens dans `youtube` va s'ajouter en bas de la page.
 
  &ensp; &ensp;  
  &ensp; &ensp;  
@@ -168,7 +168,7 @@ le dernier lien, une liste de chansons avec leur liens dans `youtube` va s'ajout
     
    
 On installe d'abord la dernière version de `Docker Compose`, ce qui est compatible, 
-d'après notre vérification sur le site Github, avec le format du fichier version `2.1`.
+après vérification sur le site Github, avec le format du fichier version `2.1`.
 ```sh
 $ curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 $ chmod +x /usr/local/bin/docker-compose
@@ -189,17 +189,17 @@ $ mkdir /home/ubuntu/compose/docker/mysql
 $ cp -r /root/tiny-master/_installation /home/ubuntu/compose/docker/mysql/_installation
 ```
 
-Ensuite on doit encore changer les adresses IP internes des 3 dockers (les deux `apache`s et `mysql`) vers la bonne plage (`172.20.20.0/24`)
+Ensuite on doit encore changer les adresses IP internes des 3 dockers (les deux `apache`s et `mysql`) dans la bonne plage (`172.20.20.0/24`)
 comme il est demandé dans l'énoncé dans tous les fichiers de configuration où il faut (`/home/ubuntu/compose/docker/nginx/config/nginx/nginx.conf`,
 `/home/ubuntu/compose/docker/nginx/config/nginx/conf.d/default.conf`, `/home/ubuntu/compose/docker/apache/html/application/config/config.php`). 
-On change d'ailleurs aussi le nom et le mot de passe de l'utilisateur 
+D'ailleurs on change aussi le nom et le mot de passe de l'utilisateur 
 de la base de données dans le fichier de configuration d'apache `/home/ubuntu/compose/docker/apache/html/application/config/config.php`.  
   
-Une fois toutes ces préparations soient faites, 
-on peut rédiger un `docker-compose.yml` directement sous le répertoire `/home/ubuntu/compose` comme étant annexé à la fin du rapport.   
+Une fois toutes ces préparations sont faites, 
+on peut rédiger un `docker-compose.yml` directement sous le répertoire `/home/ubuntu/compose`, que vous trrouverez en annexe.   
    
-Dernièrement, dans le répertoire où il y a le fichier `docker-compose.yml` on l'exécute
+Finalement, dans le répertoire où il y a le fichier `docker-compose.yml`, on l'exécute avec la commande
 ```sh
 $ docker-compose up -d
 ```
-et on retrouvera tout ce qu'on a vu dans ce TP, mais construit automatiquement à l'aide de `Docker Compose`.
+et on retrouve tout ce qu'on a vu dans ce TP, mais construit automatiquement à l'aide de `Docker Compose`.
