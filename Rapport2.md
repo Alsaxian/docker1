@@ -146,7 +146,7 @@ define('DB_PASS', 'passtiny');
 ```
 dans le fichier `/docker/apache/html/application/config/config.php`.  
   
-Finalement, on ajoute dans le fichier de configuration de `nginx` `/docker/nginx/config/nginx/conf.d/default.conf7`
+Finalement, on ajoute dans le fichier de configuration de `nginx` `/docker/nginx/config/nginx/conf.d/default.conf`
 ```
     location / {
         ...
