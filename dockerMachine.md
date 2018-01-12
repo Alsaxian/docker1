@@ -11,8 +11,8 @@ export OS_PASSWORD=$(python3 -c "import getpass; pa=getpass.getpass('Mot de pass
     --openstack-tenant-id 0172faff8a6c4c63ad7095af44d86415 \
     --openstack-flavor-name m1.xsmall \
     --openstack-image-name "Ubuntu 16.04.3 LTS Xenial" \
-    --engine-env "HTTP_PROXY=http://univ-lyon1.fr:3128" \
-    --engine-env "HTTPS_PROXY=http://univ-lyon1.fr:3128" \
+    --engine-env "HTTP_PROXY=http://proxy.univ-lyon1.fr:3128" \
+    --engine-env "HTTPS_PROXY=http://proxy.univ-lyon1.fr:3128" \
     Alsaxian-node-master
 ```
 Créer également un esclave
@@ -52,11 +52,22 @@ Pour créer un registry privé qui partage le port 5000
 ```bash
 
 ```
+
+Lancer le docker registry sur la machine Alsaxian-node-master
+```bash
+./docker-machine ssh Alsaxian-node-master \
+    sudo docker service ps registry
+````
+
 Construire une image normalement
 ```bash
 ./docker-machine ssh Alsaxian \
 sudo docker pull ubuntu
 ```
 
+./docker-machine ssh Alsaxian \
+sudo docker images |grep ubuntu | grep latest
 
+Tagguer 
+sudo docker tag 192.168. :5000/alsaxian
 
