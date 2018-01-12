@@ -1,6 +1,7 @@
- Docker-machine est pour créer de nouvelles VM
+Docker-machine est pour créer de nouvelles VM
  
- ./docker-machine create --driver openstack \ 
+```bash
+./docker-machine create --driver openstack \ 
     --openstack-auth-url "http://cloud-info.univ-lyon1.fr:5000/v3/" \
     --openstack-domain-name univ-lyon1.fr \
     --openstack-username p1715490 \
@@ -11,3 +12,4 @@
     --engine-env "HTTP_PROXY=http://univ-lyon1.fr:3128" \
     --engine-env "HTTPS_PROXY=http://univ-lyon1.fr:3128" \
     Alsaxian-node-master
+```bash
