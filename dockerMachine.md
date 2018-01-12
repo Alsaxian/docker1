@@ -1,6 +1,8 @@
 Docker-machine est pour créer de nouvelles VM
  
 ```bash
+export OS_PASSWORD=$(python3 -c "import getpass; pa=getpass.getpass('Mot de passe : '); print (pa)")
+
 ./docker-machine create --driver openstack \ 
     --openstack-auth-url "http://cloud-info.univ-lyon1.fr:5000/v3/" \
     --openstack-domain-name univ-lyon1.fr \
