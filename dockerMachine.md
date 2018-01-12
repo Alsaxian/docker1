@@ -48,22 +48,25 @@ Puis pour y attacher un esclave
     sudo docker swarm init --advertise-addr 192.168.78.194
 ```
 
-Pour créer un registry privé qui partage le port 5000
+Pour créer un registry privé qui partage le port 5000 (cei ne prend normalement pas une minute)
 ```bash
-
+./docker-machine ssh Alsaxian-node-master \
+sudo docker service create --name registry --publish 5000:5000 registry
 ```
 
-Lancer le docker registry sur la machine Alsaxian-node-master
+Vérifier le bon lancement du docker registry sur la machine Alsaxian-node-master
 ```bash
 ./docker-machine ssh Alsaxian-node-master \
     sudo docker service ps registry
 ````
 
+_Cette partie n'est pas correcte_
 Construire une image normalement
 ```bash
 ./docker-machine ssh Alsaxian \
 sudo docker pull ubuntu
 ```
+
 
 ./docker-machine ssh Alsaxian \
 sudo docker images |grep ubuntu | grep latest
