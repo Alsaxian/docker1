@@ -12,4 +12,4 @@ Docker-machine est pour créer de nouvelles VM
     --engine-env "HTTP_PROXY=http://univ-lyon1.fr:3128" \
     --engine-env "HTTPS_PROXY=http://univ-lyon1.fr:3128" \
     Alsaxian-node-master
-```bash
+```
