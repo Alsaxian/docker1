@@ -42,7 +42,21 @@ Pour initialiser un swarm sur `master`
     sudo docker swarm init --advertise-addr 192.168.78.194
 ```
 
+Puis pour y attacher un esclave
+```bash
+./docker-machine ssh Alsaxian-node-slave \
+    sudo docker swarm init --advertise-addr 192.168.78.194
+```
 
+Pour créer un registry privé qui partage le port 5000
+```bash
+
+```
+Construire une image normalement
+```bash
+./docker-machine ssh Alsaxian \
+sudo docker pull ubuntu
+```
 
 
 
